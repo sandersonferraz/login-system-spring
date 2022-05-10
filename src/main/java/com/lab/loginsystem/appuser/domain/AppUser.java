@@ -13,7 +13,6 @@ import java.util.Collections;
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @SequenceGenerator(
         name = "user_management_sequence",
@@ -28,15 +27,23 @@ public class AppUser implements UserDetails {
             generator = "user_management_sequence"
     )
     private Long id;
-    private String name;
-    private String userName;
+    private String fistName;
+    private String lastName;
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
-    private Boolean locked;
-    private Boolean enabled;
+    private Boolean locked = false;
+    private Boolean enabled = false;
 
+
+    public AppUser(String fistName, String lastName, String email, String password, AppUserRole appUserRole) {
+        this.fistName = fistName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.appUserRole = appUserRole;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -52,7 +59,15 @@ public class AppUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return email;
+    }
+
+    public String getFirstName(){
+        return fistName;
+    }
+
+    public String getLastName(){
+        return lastName;
     }
 
     @Override

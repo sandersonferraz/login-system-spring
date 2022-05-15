@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
         sequenceName = "confirmation_token_sequence",
         allocationSize = 1
 )
+@Entity
 public class ConfirmationToken {
 
     @Id
@@ -42,12 +43,10 @@ public class ConfirmationToken {
             String token,
             LocalDateTime createdAt,
             LocalDateTime expiresAt,
-            LocalDateTime confirmedAt,
     AppUser appUser) {
         this.token = token;
         this.createdAt = createdAt;
         this.expiresAt = expiresAt;
-        this.confirmedAt = confirmedAt;
         this.appUser = appUser;
     }
 }
